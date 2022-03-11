@@ -144,6 +144,50 @@ app.get('/jokeme', (req, res) => {
     console.log ("req.query", req.query);
 })
 
+// app.get('/jokeme2', (req, res) => {
+    
+//   const fileName = uuidv4();
+//   const downloadFile = async (top, bottom, meme, fontSize, font, fileName, path = './public/') => {
+//       const request = {
+//           method: 'get',
+//           url: 'https://mywerld.com/add-text-to-image.php',
+//           data: {
+//               selection: meme,
+//               text: bottom,
+//           },
+//           responseType: 'stream'
+//       };
+  
+//       if (!fs.existsSync(path)){
+//           fs.mkdirSync(path, { recursive: true });
+//       }
+  
+//       try {
+//           console.log(request);
+//         const response = await axios(request);
+    
+//         const w = response.data.pipe(fs.createWriteStream(`${path}${fileName}.jpg`));
+//         w.on('finish', () => {
+//           console.log(`Successfully downloaded ${fileName}!`);
+//           res.status(201).send({
+//               "url": 'http://localhost:8080/images/' + fileName + '.jpg',
+//               "status": "successful"
+//           })
+//         });
+//       } catch (err) {
+//           console.log(err);
+//           console.log ('ignoring error hahahahahah');
+//           res.status(500).send({
+//               "message": "oops"
+//           })
+//       }
+//     }; 
+
+//   downloadFile (req.query.top, req.query.bottom, req.query.meme, req.query.fontSize, req.query.font, fileName, './public/images/');
+
+//   console.log ("req.query", req.query);
+// })
+
 
 app.listen(8080, () => {
 

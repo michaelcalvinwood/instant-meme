@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Jokeme.scss';
 import axios from 'axios';
-import meme from "../../assets/images/transparent-meme.png"
-import background from "../../assets/images/meme-background.jpg";
-import censoredBanana from "../../assets/images/censored-banana.jpg";
+import meme from "../../assets/images/transparent-meme-sized.png"
+import background from "../../assets/images/meme-background-sized.jpg";
+import censoredBanana from "../../assets/images/censored-banana-sized.jpg";
 import Header from '../Header/Header';
 
 

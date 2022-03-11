@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Header.scss"
-import headerImage from "../../assets/images/transparent-meme.png"
+import headerImage from "../../assets/images/transparent-meme-sized.png"
 import {Link} from 'react-router-dom';
 
 function Header() {

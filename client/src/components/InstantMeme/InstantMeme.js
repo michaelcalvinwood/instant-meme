@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import meme from "../../assets/images/transparent-meme.png"
+import meme from "../../assets/images/transparent-meme-sized.png"
 import './InstantMeme.scss';
-import background from "../../assets/images/meme-background.jpg";
+import background from "../../assets/images/meme-background-sized.jpg";
 import Header from '../Header/Header';
 export class InstantMeme extends Component {
 
@@ -54,6 +54,12 @@ export class InstantMeme extends Component {
         this.getInstantMeme(top, bottom, this.state.defaultMemes[selected]);
     }
 
+    reset = e => {
+        e.preventDefault();
+        console.log(e.target);
+        // e.target.reset();
+    }
+
     render() {
         if (!this.state.defaultMemes) {
             this.getImages();
@@ -66,7 +72,7 @@ export class InstantMeme extends Component {
                 <div className="instant">
                     <img className="instant__background" src={background} />
                     <div className="instant__container">
-                        <form className="instant__form" onSubmit={this.handleForm}>
+                        <form className="instant__form" onSubmit={this.handleForm} onClick={this.reset}>
                             <label>
                                 <p>Top Text</p>
                                 <input className="instant__input" type="text" name="topText"></input>
@@ -75,8 +81,7 @@ export class InstantMeme extends Component {
                                 <p>Bottom Text</p>
                                 <input className='instant__input' type="text" name="bottomText"></input>
                             </label>
-                            <button className="instant__meme-button">InstantMeme</button>
-                            <button className="instant__reset-button">Reset</button>
+                            <button className="instant__meme-button">InstantMeme</button>             
 
                         </form>
                         <img className="instant__meme" src={this.state.meme} />

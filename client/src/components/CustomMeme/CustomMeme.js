@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import meme from "../../assets/images/meme.jpg"
-import meme from "../../assets/images/transparent-meme.png"
+import meme from "../../assets/images/transparent-meme-sized.png"
 import './CustomMeme.scss';
-import background from "../../assets/images/meme-background.jpg";
+import background from "../../assets/images/meme-background-sized.jpg";
 import imageList from "../../assets/data/imageList.json";
 import star from "../../assets/images/star.svg"
 import Header from '../Header/Header';
@@ -88,8 +88,7 @@ export class customMeme extends Component {
                   <p className='custom__bottom-text'>Bottom Text</p>
                   <input className='custom__input' type="text" name="bottomText"></input>
                 </label>
-                <button className="custom__meme-button">customMeme</button>
-                <button className="custom__reset-button">Reset</button>
+                <button className="custom__meme-button">CustomMeme</button>
               </form>
               <div className="custom__meme-container">
                 <img className="custom__meme" src={this.state.meme} />
