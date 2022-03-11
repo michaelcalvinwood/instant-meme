@@ -1,0 +1,27 @@
+* {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.menu {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/images/meme-background.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__button-container {
+        display: flex;
+        flex-direction: column;
+        height: 10rem;
+        justify-content: space-between;
+    }
+    &__button {
+        font-size: 1.5rem;
+        padding: .25rem;
+        border-radius: 4px;
+    }
+}
