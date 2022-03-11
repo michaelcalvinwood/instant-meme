@@ -6,6 +6,8 @@ import Jokeme from './components/Jokeme/Jokeme';
 import CustomMeme from './components/CustomMeme/CustomMeme';
 import { Component } from 'react';
 import DropzoneComponent from './components/DropZone/DropZone';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Header from './components/Header/Header';
 
 class App extends Component {
   state = {
@@ -19,37 +21,16 @@ class App extends Component {
   }
 
   render() {
-    switch (this.state.page) {
-      case 'menuScreen':
-        return (
-          <div className="App">
-            <MenuScreen switchPage={this.switchPage}/>
-          </div>
-        );
-      case 'instantMeme': {
-        return (
-          <div className="App">
-            <InstantMeme switchPage={this.switchPage}/>
-          </div>
-        );
-      }
-      case 'jokeme': {
-        return (
-          <div className="App">
-            <Jokeme switchPage={this.switchPage}/>
-          </div>
-        );
-      }
-      case 'customMeme': {
-        return (
-          <div className="App">
-            {/* <CustomMeme switchPage={this.switchPage}/> */}
-            <DropzoneComponent />
-          </div>
-        );
-      }
-    }
-    
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={MenuScreen} />
+          <Route path="/instant-meme" component={InstantMeme} />
+          <Route path="/jokeme" component={Jokeme} />
+          <Route path="/custom-meme" component={CustomMeme} />
+        </Switch>
+      </BrowserRouter>
+    )    
   }
 }
 

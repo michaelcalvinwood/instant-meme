@@ -84,7 +84,7 @@ app.post('/meme', (req, res) => {
             })
           });
         } catch (err) {
-        
+            console.log (err);
             console.log ('ignoring error hahahahahah');
             res.status(500).send({
                 "message": "oops"
@@ -131,7 +131,7 @@ app.get('/jokeme', (req, res) => {
             })
           });
         } catch (err) {
-        
+            console.log(err);
             console.log ('ignoring error hahahahahah');
             res.status(500).send({
                 "message": "oops"
