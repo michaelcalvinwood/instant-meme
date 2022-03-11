@@ -22,7 +22,6 @@ export class InstantMeme extends Component {
     }
 
     getInstantMeme = (top, bottom, meme, fontSize = '40', font = 'Impact') => {
-        bottom="one\ntwo";
         const request = {
             url: 'http://localhost:8080/meme',
             method: 'post',

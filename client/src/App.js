@@ -5,6 +5,7 @@ import MenuScreen from './components/MenuScreen/MenuScreen';
 import Jokeme from './components/Jokeme/Jokeme';
 import CustomMeme from './components/CustomMeme/CustomMeme';
 import { Component } from 'react';
+import DropzoneComponent from './components/DropZone/DropZone';
 
 class App extends Component {
   state = {
@@ -42,7 +43,8 @@ class App extends Component {
       case 'customMeme': {
         return (
           <div className="App">
-            <CustomMeme switchPage={this.switchPage}/>
+            {/* <CustomMeme switchPage={this.switchPage}/> */}
+            <DropzoneComponent />
           </div>
         );
       }

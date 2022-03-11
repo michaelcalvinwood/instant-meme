@@ -6,6 +6,42 @@ const showDir = require('http-server/lib/core/show-dir');
 const axios = require("axios").default;
 const { v4: uuidv4 } = require('uuid');
 
+// New Code Start
+
+const multer = require('multer');
+const upload = multer({ dest:'uploads/'});
+const sizeOf = require('image-size');
+const exphbs = require('express-handlebars');
+
+// app.engine('.hbs', exphbs({ extname:'.hbs'}));
+// app.set('view engine','.hbs');
+
+app.get('/', (req, res) => {
+  return res.render('index', {layout: false});
+});
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  if (!req.file.mimetype.startsWith('image/')) {
+    return res.status(422).json({
+      error :'The uploaded file must be an image'
+    });
+  }
+
+  const dimensions = sizeOf(req.file.path);
+
+  if ((dimensions.width < 640) || (dimensions.height < 480)) {
+    return res.status(422).json({
+      error :'The image must be at least 640 x 480px'
+    });
+  }
+  fs.writeFileSync('./public/images/uploaded/thisisme.jpg', req.file, "binary");
+
+  return res.status(200).send(req.file);
+});
+
+// New Code End
+
+
 app.use(cors());
 app.use(express.static('public'));
 app.use('/meme', express.json());
