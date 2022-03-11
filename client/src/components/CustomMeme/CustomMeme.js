@@ -5,14 +5,18 @@ import meme from "../../assets/images/transparent-meme-sized.png"
 import './CustomMeme.scss';
 import background from "../../assets/images/meme-background-sized.jpg";
 import imageList from "../../assets/data/imageList.json";
-import star from "../../assets/images/star.svg"
+// import star from "../../assets/images/star.svg"
 import Header from '../Header/Header';
+import starLight from "../../assets/images/star-light.svg"
+import starSolid from "../../assets/images/star-solid.svg"
+
 export class customMeme extends Component {
 
   state = {
     meme: meme,
     defaultMemes: JSON.parse(localStorage.getItem('defaultMemes')) || null,
-    imageName: null
+    imageName: null,
+    favorites: JSON.parse(localStorage.getItem('favorites')) || [],
   }
 
   randomNumber = max => {
@@ -60,10 +64,40 @@ export class customMeme extends Component {
   }
 
   selectedTitle = name => {
-    this.setState({
-      meme: `https://mywerld.com/images/` + name + '.jpg',
-      imageName: name
-    })
+    console.log('selectedTitle name meme', name, meme);
+
+    if (name === '--') {
+      this.setState({
+        meme: meme,
+        imageName: null
+      })
+    } else {  
+        this.setState({
+          meme: `https://mywerld.com/images/` + name + '.jpg',
+          imageName: name
+        })
+    }
+  }
+
+  clickedStar = name => {
+    // is it already a favorite?
+
+    const test = this.state.favorites.find(favorite => favorite === name);
+
+    if (test) {
+      let favorites = this.state.favorites.filter(favorite => favorite !== name);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      this.setState({
+        favorites: favorites,
+      })
+    } else {
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites.push(name);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      this.setState({
+        favorites: favorites,
+      })
+    }
   }
 
   render() {
@@ -71,6 +105,7 @@ export class customMeme extends Component {
       this.getImages();
       return;
     }
+
 
     return (
       <>
@@ -88,6 +123,13 @@ export class customMeme extends Component {
                   <p className='custom__bottom-text'>Bottom Text</p>
                   <input className='custom__input' type="text" name="bottomText"></input>
                 </label>
+                <select className='custom__select' name="the-favorite" onChange={(e) => {this.selectedTitle(e.target.value)}}>
+                  <option value='--'>--</option>
+                  {this.state.favorites.map((favorite)=>{
+                    return <option value={favorite}>{favorite}</option>
+                  })}
+                </select>
+
                 <button className="custom__meme-button">CustomMeme</button>
               </form>
               <div className="custom__meme-container">
@@ -98,9 +140,16 @@ export class customMeme extends Component {
               {imageList
                 .sort()
                 .map(imageName => {
+                  let test = this.state.favorites.find(favorite => favorite === imageName);
+                  let isFavorite = false;
+                  if (test) isFavorite = true;
+                  let star = {};
+                  isFavorite ? 
+                    star = starSolid : 
+                    star = starLight;
                   return (
                     <div key={imageName} className="custom__image-name" onClick={() => this.selectedTitle(imageName)}>
-                      <img className="custom__star" src={star} />
+                      <img className="custom__star" src={star} onClick={() => {this.clickedStar(imageName)}}/>
                       <p className="custom__image-title">{imageName}</p>
                     </div>
                   )

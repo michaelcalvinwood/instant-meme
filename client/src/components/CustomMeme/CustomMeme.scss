@@ -86,7 +86,7 @@
         background-color:#eee231;
       }
 
-      margin-top: 2rem;
+      margin-top: 1.7rem;
     }
 
 
@@ -128,12 +128,23 @@
       margin: auto;
       height: 1.25rem;
       cursor: pointer;
+
+      &--favorite{
+        fill: black;
+      }
     }
 
     &__image-title {
       margin: .25rem 0;
       text-align: center;
       cursor: pointer;
+    }
+
+    &__select{
+      height: 1.5rem;
+      padding:.25rem;
+      margin-top:.9em;
+      width:10rem;
     }
 
     
