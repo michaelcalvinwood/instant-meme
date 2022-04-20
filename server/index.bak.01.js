@@ -16,7 +16,7 @@ app.post('/meme', (req, res) => {
     downloadFile (req.body.top, req.body.bottom, req.body.meme, req.body.fontSize, req.body.font, fileName, './public/images/');
 
     res.status(201).send({
-        "url": 'http://localhost:8080/images/' + fileName + '.jpg',
+        "url": `${process.env.REACT_APP_BASE_URL}/images/` + fileName + '.jpg',
         "status": "successful"
     })
 })

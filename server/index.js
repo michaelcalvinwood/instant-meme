@@ -13,6 +13,9 @@ const upload = multer({ dest:'uploads/'});
 const sizeOf = require('image-size');
 const exphbs = require('express-handlebars');
 
+const https = require('https');
+const PORT = 8080;
+
 // app.engine('.hbs', exphbs({ extname:'.hbs'}));
 // app.set('view engine','.hbs');
 
@@ -189,7 +192,16 @@ app.get('/jokeme', (req, res) => {
 // })
 
 
-app.listen(8080, () => {
+// app.listen(8080, () => {
+//   console.log ("server running on port 8080")
+// })
 
-})
 
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/instantmeme.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/instantmeme.net/fullchain.pem'),
+ }, app);
+ 
+ httpsServer.listen(PORT, () => {
+  console.log(`HTTPS Server running on port ${PORT}`);
+ });
