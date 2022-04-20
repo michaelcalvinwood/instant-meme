@@ -105,7 +105,7 @@ app.get('/jokeme', (req, res) => {
             method: 'GET',
             url: 'https://textoverimage.moesif.com/image',
             params: {
-                image_url: `https://mywerld.com/images/${meme}.jpg`,
+                image_url: `https://instantmeme.net/stock/${meme}.jpg`,
                 text: bottom,
                 text_size: fontSize,
                 y_align: "bottom",
