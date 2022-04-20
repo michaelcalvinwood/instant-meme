@@ -11,6 +11,28 @@ export class InstantMeme extends Component {
         defaultMemes: JSON.parse(localStorage.getItem('defaultMemes')) || null
     }
 
+    getImages = () => {
+        let request = 
+        {
+            method: 'GET',
+            url: 'https://ronreiter-meme-generator.p.rapidapi.com/images',
+            headers: {
+                'x-rapidapi-host': 'ronreiter-meme-generator.p.rapidapi.com',
+                'x-rapidapi-key': 'f24c60d820mshb2979420e7a5ac6p149b10jsn4470f1c4ff42'
+            }
+        };
+    
+        axios.request(request)
+        .then(function (response) {
+            localStorage.setItem('defaultMemes', JSON.stringify(response.data));
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+    }
+    
+
     randomNumber = max => {
         return Math.floor(Math.random() * max);
     }
@@ -22,7 +44,7 @@ export class InstantMeme extends Component {
 
     }
 
-    getInstantMeme = (top, bottom, meme, fontSize = '40', font = 'Impact') => {
+    getInstantMeme = (top, bottom, meme, fontSize = '20', font = 'Impact') => {
         const request = {
             url: 'http://localhost:8080/meme',
             method: 'post',
@@ -72,7 +94,7 @@ export class InstantMeme extends Component {
                 <div className="instant">
                     <img className="instant__background" src={background} />
                     <div className="instant__container">
-                        <form className="instant__form" onSubmit={this.handleForm} onClick={this.reset}>
+                        <form className="instant__form" onSubmit={this.handleForm}>
                             <label>
                                 <p>Top Text</p>
                                 <input className="instant__input" type="text" name="topText"></input>

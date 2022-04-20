@@ -5,6 +5,7 @@ import meme from "../../assets/images/transparent-meme-sized.png"
 import background from "../../assets/images/meme-background-sized.jpg";
 import censoredBanana from "../../assets/images/censored-banana-sized.jpg";
 import Header from '../Header/Header';
+import jokeList from '../../assets/data/jokeList.json';
 
 
 class Jokeme extends Component {
@@ -20,7 +21,8 @@ class Jokeme extends Component {
 
     state = {
         meme: meme,
-        defaultMemes: JSON.parse(localStorage.getItem('defaultMemes')) || null,
+        // defaultMemes: JSON.parse(localStorage.getItem('defaultMemes')) || null,
+        defaultMemes: jokeList,
         categories: JSON.parse(localStorage.getItem('jokeCategories')) || null,
         selectedCategory: 'any',
         nsfw: false,
@@ -73,39 +75,39 @@ class Jokeme extends Component {
             })
     }
 
-    getCategories(start = 1) {
-        const request = {
-            url: "https://api.jokes.one/joke/categories/search",
-            method: 'get',
-            headers: {
-                "Accept": "application/json",
-                'X-JokesOne-Api-Secret': "enhsxyKbfvDs3NM4GUK7sAeF",
-            },
-            params: {
-                query: "",
-                start: start
-            }
+    // getCategories(start = 1) {
+    //     const request = {
+    //         url: "https://api.jokes.one/joke/categories/search",
+    //         method: 'get',
+    //         headers: {
+    //             "Accept": "application/json",
+    //             'X-JokesOne-Api-Secret': "enhsxyKbfvDs3NM4GUK7sAeF",
+    //         },
+    //         params: {
+    //             query: "",
+    //             start: start
+    //         }
 
-        }
-        axios(request)
-            .then(response => {
-                const categories = response.data.contents.categories;
-                let filteredCategories = [];
-                if (categories !== null) {
-                    filteredCategories = categories.map(category => category.name);
-                    if (filteredCategories !== null) {
-                        filteredCategories.forEach(category => {
-                            console.log('getCategories category', category);
-                            this.categories.push(category);
-                        });
-                    }
-                }
-                console.log("categories", this.categories);
-            })
-            .catch(error => {
-                console.log('getCategories error', error);
-            });
-    }
+    //     }
+    //     axios(request)
+    //         .then(response => {
+    //             const categories = response.data.contents.categories;
+    //             let filteredCategories = [];
+    //             if (categories !== null) {
+    //                 filteredCategories = categories.map(category => category.name);
+    //                 if (filteredCategories !== null) {
+    //                     filteredCategories.forEach(category => {
+    //                         console.log('getCategories category', category);
+    //                         this.categories.push(category);
+    //                     });
+    //                 }
+    //             }
+    //             console.log("categories", this.categories);
+    //         })
+    //         .catch(error => {
+    //             console.log('getCategories error', error);
+    //         });
+    // }
 
     handleForm = (e) => {
         e.preventDefault();
@@ -124,6 +126,13 @@ class Jokeme extends Component {
                 "content-type": "application/json"
             }
         }
+        if (selectedCategory !== 'any') {
+            request.url = "https://api.jokes.one/joke/search";
+            request.params = {
+                category: selectedCategory
+            }
+        }
+        console.log('handleForm request',selectedCategory, request);
 
         axios(request)
             .then(response => {

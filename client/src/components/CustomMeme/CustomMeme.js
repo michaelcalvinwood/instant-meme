@@ -72,8 +72,13 @@ export class customMeme extends Component {
         imageName: null
       })
     } else {  
+        // this.setState({
+        //   meme: `https://mywerld.com/images/` + name + '.jpg',
+        //   imageName: name
+        // })
+
         this.setState({
-          meme: `https://mywerld.com/images/` + name + '.jpg',
+          meme: `${process.env.REACT_APP_BASE_URL}/stock/${name}.jpg`,
           imageName: name
         })
     }
